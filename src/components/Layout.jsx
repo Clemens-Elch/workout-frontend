@@ -24,8 +24,16 @@ function Layout() {
                     </div>
                 </nav>
                 {/* End navigation bar */}
+                <header>
+                    <h1>WorkoutDB</h1>
+                </header>
+                <main>
+                    <Outlet />
+                </main>
             </div>
         </div>
+
+
     )
 }
 
