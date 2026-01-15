@@ -1,14 +1,15 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import DeleteWorkout from "./DeleteWorkout.jsx";
 
 const AthletesWorkout = () => {
-    const { athleteId } = useParams();
+    const {athleteId} = useParams();
     const [workouts, setWorkouts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch(`http://localhost:8080/athletes/${athleteId}/workouts`)
+        fetch(`/api/athletes/${athleteId}/workouts`)
             .then((response) => {
                 if (response.ok) {
                     return response.json();
@@ -38,8 +39,8 @@ const AthletesWorkout = () => {
             <h2 style={{fontWeight: "bold"}}>Workouts</h2>
             <div>
                 <ul>
-                    {workouts.map((workout, i) => (
-                        <li key={i}  style={{border: "1px solid black"}}>
+                    {workouts.map((workout) => (
+                        <li key={workout.workoutId} style={{border: "1px solid black"}}>
                             <div style={{textAlign: "left"}}>
                                 {workout.sport}
                             </div>
@@ -49,6 +50,15 @@ const AthletesWorkout = () => {
                             <div style={{textAlign: "right"}}>
                                 {workout.averageHF}
                             </div>
+                            <DeleteWorkout
+                                athleteId={athleteId}
+                                workoutId={workout.workoutId}
+                                onDelete={() => {
+                                    const id = workout.workoutId;
+                                    setWorkouts((prev) =>
+                                        prev.filter((w) => w.workoutId !== id));
+                                }}
+                            />
                         </li>
                     ))}
                 </ul>

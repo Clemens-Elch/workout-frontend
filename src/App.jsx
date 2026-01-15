@@ -15,8 +15,6 @@ function App() {
                     <Route path="athletes" element={<ListAthletes />}/>
                     <Route path="athletes/:athleteId/workouts" element={<AthletesWorkout />}/>
                 </Route>
-
-
             </Routes>
         </BrowserRouter>
 
