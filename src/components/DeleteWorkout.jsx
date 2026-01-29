@@ -28,7 +28,7 @@ const DeleteWorkout = ({athleteId, workoutId, onDelete}) => {
     return(
         <div>
             <button onClick={handleDelete}>Delete</button>
-            {status === "success" && <span style={{ color: "green" }}>Deleted</span>}
+            {status === "success" && <span style={{ color: "blue" }}>Deleted</span>}
             {status === "error" && <span style={{ color: "red" }}>Error</span>}
         </div>
     )

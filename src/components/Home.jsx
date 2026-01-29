@@ -5,7 +5,7 @@ const Home = () => {
         <div>
             <h3>Welcome to the workout!</h3>
             <p>Athletes:
-                <Link to="/listAthletes" style={{marginLeft: "5px"}}>here</Link>
+                <Link to="/athletes" style={{marginLeft: "5px"}}>here</Link>
             </p>
         </div>
     )

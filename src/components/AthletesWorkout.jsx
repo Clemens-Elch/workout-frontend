@@ -30,6 +30,16 @@ const AthletesWorkout = () => {
     console.log("athleteId:", athleteId);
 
 
+    const getDeleteButton = (id) => (
+        <DeleteWorkout
+            athleteId={athleteId}
+            workoutId={id}
+            onDelete={() => {
+                setWorkouts((prev) => prev.filter((w) => w.workoutId !== id));
+            }}
+        />
+    );
+
     // Loading and error handling before render
     if (loading) return <p>Loading workouts...</p>;
     if (error) return <p>Error loading workouts: {error.message}</p>;
@@ -38,27 +48,23 @@ const AthletesWorkout = () => {
         <div>
             <h2 style={{fontWeight: "bold"}}>Workouts</h2>
             <div>
-                <ul>
+                <ul style={{listStyleType: "none"}}>
                     {workouts.map((workout) => (
-                        <li key={workout.workoutId} style={{border: "1px solid black"}}>
-                            <div style={{textAlign: "left"}}>
-                                {workout.sport}
+                        <li key={workout.workoutId} style={{border: "1px solid black", marginRight: "40px", marginLeft: "40px"}}>
+                            <div style={{display: "flex", "justifyContent": "space-between", alignItems: "center"}}>
+                                <div style={{flex: 2, textAlign: "left", marginLeft: "20px", fontWeight: "bold"}}>
+                                    {workout.sport}
+                                </div>
+                                <div style={{textAlign: "center", flex: 4}}>
+                                    {workout.startPoint} - {workout.endPoint}
+                                </div>
+                                <div className="badge, bg-secondary rounded-pill text-white p-2" style={{textAlign: "center", marginRight: "1rem" }}>
+                                    {workout.averageHF}
+                                </div>
+                                <div style={{textAlign: "right", marginRight: "20px", flex: 2, padding: "15px"}}>
+                                    {getDeleteButton(workout.workoutId)}
+                                </div>
                             </div>
-                            <div style={{textAlign: "center"}}>
-                                {workout.startPoint} - {workout.endPoint}
-                            </div>
-                            <div style={{textAlign: "right"}}>
-                                {workout.averageHF}
-                            </div>
-                            <DeleteWorkout
-                                athleteId={athleteId}
-                                workoutId={workout.workoutId}
-                                onDelete={() => {
-                                    const id = workout.workoutId;
-                                    setWorkouts((prev) =>
-                                        prev.filter((w) => w.workoutId !== id));
-                                }}
-                            />
                         </li>
                     ))}
                 </ul>
